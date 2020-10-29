@@ -1,6 +1,6 @@
 ![banner.jpg](./almost-no-durability/banner.jpg?raw=true)
 
-## ![icon.png](./almost-no-durability/icon.png?raw=true)[Download@raftmodding.com](https://www.raftmodding.com/mods/almost-no-durability)
+## [![icon.png](./almost-no-durability/icon.png?raw=true)Download@raftmodding.com](https://www.raftmodding.com/mods/almost-no-durability)
 
 # Info
 - ### Multiplayer approved
