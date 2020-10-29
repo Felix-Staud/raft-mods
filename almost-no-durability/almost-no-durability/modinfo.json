@@ -1,0 +1,13 @@
+{
+  "name": "almost no durability",
+  "author": "zer0",
+  "description": "reduces the durability depletion to almost 0 for equipment and tools (It annoyed me too much). Props go to the 'YourBalance' (by Akitake) mod which codebase I used to create this mod",
+  "version": "1.0b",
+  "license": "GNU AGPLv3",
+  "icon": "icon.png",
+  "banner": "banner.jpg",
+  "gameVersion": "1.0",
+  "updateUrl": "https://www.raftmodding.com/api/v1/mods/YOUR-MOD-SLUG-HERE/version.txt",
+  "isModPermanent": false,
+  "excludedFiles": [".backup"]
+}
