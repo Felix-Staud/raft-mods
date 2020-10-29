@@ -5,6 +5,7 @@
 # Info
 - ### Multiplayer approved
   - _We tested this with two persons, both having the mod running, and it seemed to work fine_
+- feel free to open an [issue](https://github.com/Felix-Puetz/raft-mods/issues) if you find bugs
 
 # Thanks to
 - "Akaren" for testing if it works in multiplayer 
