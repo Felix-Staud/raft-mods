@@ -7,7 +7,7 @@
   "icon": "icon.png",
   "banner": "banner.jpg",
   "gameVersion": "1.0",
-  "updateUrl": "https://www.raftmodding.com/mods/almost-no-durability/version.txt",
+  "updateUrl": "https://www.raftmodding.com/mods/almost-no-durability",
   "isModPermanent": false,
   "excludedFiles": []
 }
