@@ -1,5 +1,7 @@
 ![banner.jpg](./almost-no-durability/banner.jpg?raw=true)
 
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
 ## [![icon.png](./almost-no-durability/icon.png?raw=true)Download@raftmodding.com](https://www.raftmodding.com/mods/almost-no-durability)
 
 # Info
