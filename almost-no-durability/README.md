@@ -2,7 +2,7 @@
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-## Download@raftmodding.com](https://www.raftmodding.com/mods/almost-no-durability)
+## [Download@raftmodding.com](https://www.raftmodding.com/mods/almost-no-durability)
 
 # Info
 - ### Multiplayer approved
