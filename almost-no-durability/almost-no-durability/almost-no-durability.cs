@@ -2,25 +2,33 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using UnityEngine;
 
 public class AlmostNoDurability : Mod
 {
 
     private IDictionary<int, int> defaultMaxUses = new Dictionary<int, int>();
+    Harmony harmony;
 
     public void Start()
     {
         Log("loaded :)");
+        //harmony = new Harmony("de.zeropublix.raftmods.SimplifiedPipes");
+        //harmony.PatchAll(Assembly.GetExecutingAssembly());
     }
 
     public void OnModUnload()
     {
+        //harmony.UnpatchAll();
+        //Destroy(gameObject);
         Log("unloaded :(");
     }
 
     public override void WorldEvent_WorldLoaded()
     {
+        GameModeValueManager.GetCurrentGameModeValue().toolVariables.areToolsIndestructible = true;
+        /*
         if (RAPI.GetLocalPlayer() == null) return;
 
         // Refresh item lists
@@ -38,6 +46,7 @@ public class AlmostNoDurability : Mod
 
         SetToolDurabilityMultiplier(0.0000001f);
         SetEquipmentMaxUses(999999999);
+        */
     }
 
     private void SetToolDurabilityMultiplier(float multiplier)
@@ -75,5 +84,19 @@ public class AlmostNoDurability : Mod
     private void Log(String msg)
     {
         Debug.Log("[AlmostNoDurabilityMod]\t" + msg);
+    }
+
+    [HarmonyPatch(typeof(PlayerInventory), "RemoveDurabillityFromHotSlot")]
+    public class HarmonyPatch_PlayerInventory_RemoveDurabillityFromHotSlot
+    {
+        [HarmonyPostfix]
+        static void PostFix(PlayerInventory __instance)
+        {
+        }
+
+        static void Log(string msg)
+        {
+            Debug.Log("[almost-no-durability MOD - RemoveDurabillityFromHotSlot]\t" + msg);
+        }
     }
 }
