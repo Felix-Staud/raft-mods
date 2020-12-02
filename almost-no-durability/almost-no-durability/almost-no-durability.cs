@@ -1,7 +1,6 @@
 ﻿using HarmonyLib;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
@@ -14,14 +13,14 @@ public class AlmostNoDurability : Mod
     public void Start()
     {
         Log("loaded :)");
-        //harmony = new Harmony("de.zeropublix.raftmods.SimplifiedPipes");
-        //harmony.PatchAll(Assembly.GetExecutingAssembly());
+        harmony = new Harmony("de.felixpuetz.raftmods.almostnodurability");
+        harmony.PatchAll(Assembly.GetExecutingAssembly());
     }
 
     public void OnModUnload()
     {
-        //harmony.UnpatchAll();
-        //Destroy(gameObject);
+        harmony.UnpatchAll();
+        Destroy(gameObject);
         Log("unloaded :(");
     }
 
