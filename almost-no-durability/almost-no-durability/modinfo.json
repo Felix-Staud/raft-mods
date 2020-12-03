@@ -1,8 +1,8 @@
 {
   "name": "almost no durability",
   "author": "zer0",
-  "description": "reduces the durability depletion to almost 0 for equipment and tools (It annoyed me too much). Props go to the 'YourBalance' (by Akitake) mod which codebase I used to create this mod",
-  "version": "1.0b",
+  "description": "reduces the durability depletion to almost 0 for equipment and tools (It annoyed me too much).",
+  "version": "1.2b",
   "license": "GNU AGPLv3",
   "icon": "icon.png",
   "banner": "banner.jpg",
