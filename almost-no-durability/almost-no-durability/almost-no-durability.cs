@@ -34,15 +34,15 @@ public class AlmostNoDurability : Mod
         Debug.Log("[AlmostNoDurabilityMod]\t" + msg);
     }
 
-    [HarmonyPatch(typeof(Equipment_AirBottle), "UpdateEquipment")]
-    public class HarmonyPatch_Equipment_AirBottle_UpdateEquipment
+    [HarmonyPatch(typeof(Equipment), "UpdateEquipment")]
+    public class HarmonyPatch_Equipment_UpdateEquipment
     {
         [HarmonyPrefix]
-        static void Prefix(Equipment_AirBottle __instance, Slot_Equip ___equippedSlot)
+        static void Prefix(Equipment __instance, Slot_Equip ___equippedSlot)
         {
             Log("incrementn uses by 1 before update");
             
-            if (___equippedSlot != null)
+            if (___equippedSlot != null && ___equippedSlot.GetCurrentTotalUses() < ___equippedSlot.GetMaxStackUses())
             {
                 ___equippedSlot.IncrementUses(+1, true);
             }
@@ -50,7 +50,7 @@ public class AlmostNoDurability : Mod
 
         static void Log(string msg)
         {
-            Debug.Log("[almost-no-durability MOD - HarmonyPatch_Equipment_AirBottle_UpdateEquipment]\t" + msg);
+            Debug.Log("[almost-no-durability MOD - HarmonyPatch_Equipment_UpdateEquipment]\t" + msg);
         }
     }
 }
