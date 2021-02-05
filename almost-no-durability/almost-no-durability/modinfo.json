@@ -1,8 +1,8 @@
 {
   "name": "almost no durability",
   "author": "zer0",
-  "description": "reduces the durability depletion to almost 0 for equipment and tools (It annoyed me too much).",
-  "version": "1.3b",
+  "description": "reduces the durability depletion to almost 0 for equipment and tools.",
+  "version": "2.0",
   "license": "GNU AGPLv3",
   "icon": "icon.png",
   "banner": "banner.jpg",

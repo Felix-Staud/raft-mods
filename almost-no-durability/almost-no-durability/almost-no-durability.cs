@@ -1,13 +1,10 @@
 ﻿using HarmonyLib;
 using System;
-using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
 public class AlmostNoDurability : Mod
 {
-
-    private IDictionary<int, int> defaultMaxUses = new Dictionary<int, int>();
     Harmony harmony;
 
     public void Start()
@@ -34,23 +31,19 @@ public class AlmostNoDurability : Mod
         Debug.Log("[AlmostNoDurabilityMod]\t" + msg);
     }
 
-    [HarmonyPatch(typeof(Equipment), "UpdateEquipment")]
+    [HarmonyPatch(typeof(Slot), "IncrementUses")]
     public class HarmonyPatch_Equipment_UpdateEquipment
     {
         [HarmonyPrefix]
-        static void Prefix(Equipment __instance, Slot_Equip ___equippedSlot)
+        static void Prefix(ref Slot __instance, ref int amountOfUsesToAdd)
         {
-            Log("incrementn uses by 1 before update");
-            
-            if (___equippedSlot != null && ___equippedSlot.GetCurrentTotalUses() < ___equippedSlot.GetMaxStackUses())
+            if (__instance.slotType == SlotType.Equipment)
             {
-                ___equippedSlot.IncrementUses(+1, true);
+                if (amountOfUsesToAdd < 0)
+                {
+                    amountOfUsesToAdd = 0;
+                }
             }
-        }
-
-        static void Log(string msg)
-        {
-            Debug.Log("[almost-no-durability MOD - HarmonyPatch_Equipment_UpdateEquipment]\t" + msg);
         }
     }
 }
