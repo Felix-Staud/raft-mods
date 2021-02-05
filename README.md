@@ -3,3 +3,4 @@
 ## Mod List
 
 - [almost no durability](https://github.com/Felix-Puetz/raft-mods/tree/main/almost-no-durability)
+- [simplified-pipes](https://github.com/Felix-Puetz/raft-mods/tree/main/simplified-pipes) (NO RELEASE! DROPPED FOR NOW)
