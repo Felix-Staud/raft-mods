@@ -2,12 +2,31 @@
   "name": "almost no durability",
   "author": "zer0",
   "description": "reduces the durability depletion to almost 0 for equipment and tools.",
-  "version": "2.1",
+  "version": "3.0",
   "license": "GNU AGPLv3",
   "icon": "icon.png",
   "banner": "banner.jpg",
   "gameVersion": "1.0",
   "updateUrl": "https://www.raftmodding.com/api/v1/mods/almost-no-durability/version.txt",
   "isModPermanent": false,
-  "excludedFiles": []
+  "excludedFiles": [],
+  "modSettings": [
+    {
+      "name": "Durability Modifier",
+      "type": "combobox",
+      "default": "infinite",
+      "values": [
+        "infinite",
+        "1x (original)",
+        "2x",
+        "3x",
+        "4x",
+        "5x",
+        "6x",
+        "7x",
+        "8x",
+        "9x"
+      ]
+    }
+  ]
 }
