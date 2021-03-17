@@ -39,7 +39,7 @@ public class AlmostNoDurability : Mod
     }
 
     [HarmonyPatch(typeof(Slot), "IncrementUses")]
-    public class HarmonyPatch_Equipment_UpdateEquipment
+    public class HarmonyPatch_Slot_IncrementUses
     {
         [HarmonyPrefix]
         static void Prefix(ref Slot __instance, ref int amountOfUsesToAdd)
