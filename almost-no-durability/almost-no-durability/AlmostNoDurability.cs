@@ -46,7 +46,7 @@ public class AlmostNoDurability : Mod
         {
             bool prevent = false;
 
-            if (amountOfUsesToAdd != null)
+            if (__instance.itemInstance.settings_consumeable.FoodType == FoodType.None && amountOfUsesToAdd != null)
             {
                 if (modifier > 0) {
                     int hash = __instance.GetHashCode();
