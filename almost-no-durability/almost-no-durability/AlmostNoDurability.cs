@@ -23,9 +23,39 @@ public class AlmostNoDurability : Mod
         Debug.LogError("[" + modInfo.name + "]: " + message.ToString());
     }
 
+    public static void setModifier(int value) 
+    {
+        modifier = value;
+        Log("Modifier: "+ modifier);
+    }
+
     public static bool slotShouldBeAffected(Slot slot) {
-        return slot.itemInstance.settings_consumeable.FoodType == FoodType.None
-            && slot.itemInstance.settings_cookable.CookingTime <= 0;
+        return slot.itemInstance.settings_equipment != null 
+            && slot.itemInstance.settings_equipment.EquipType != EquipSlotType.None;
+    }
+
+    /**
+     * returns true if durability loss has to be prevented
+     */
+    public static bool doCache(object instance) {
+        if (modifier > 0) {
+            int hash = instance.GetHashCode();
+
+            if (counterCache.ContainsKey(hash)) {
+                counterCache[hash] = counterCache[hash] + 1;
+            } else {
+                counterCache.Add(hash, 1);
+            }
+
+            if (counterCache[hash] < modifier) {
+                return true;
+            } else {
+                counterCache[hash] = 0;
+                return false;
+            }
+        } else {
+            return true;
+        }
     }
 
     public void Start()
@@ -43,52 +73,16 @@ public class AlmostNoDurability : Mod
         Log("unloaded :(");
     }
 
-    [HarmonyPatch(typeof(Slot), "IncrementUses")]
-    public class HarmonyPatch_Slot_IncrementUses
-    {
-        [HarmonyPrefix]
-        static void Prefix(ref Slot __instance, ref int amountOfUsesToAdd)
-        {
-            bool prevent = false;
-
-            if (amountOfUsesToAdd != null && slotShouldBeAffected(__instance))
-            {
-                if (modifier > 0) {
-                    int hash = __instance.GetHashCode();
-
-                    if (counterCache.ContainsKey(hash)) {
-                        counterCache[hash] = counterCache[hash] + 1;
-                    } else {
-                        counterCache.Add(hash, 1);
-                    }
-
-                    if (counterCache[hash] < modifier) {
-                        prevent = true;
-                    } else {
-                        counterCache[hash] = 0;
-                    }
-                } else {
-                    prevent = true;
-                }
-
-                if (amountOfUsesToAdd < 0 && prevent)
-                {
-                    amountOfUsesToAdd = 0;
-                }
-            }
-        }
-    }
-
-    /***************
-    *   SETTINGS   *
-    ***************/
+    /*******************************
+    *   EXTRA-SETTINGS-API STUFF   *
+    ********************************/
     static HarmonyLib.Traverse ExtraSettingsAPI_Traverse;
     static bool ExtraSettingsAPI_Loaded = false;
 
     
     public void ExtraSettingsAPI_Load()
     {
-        modifier = ExtraSettingsAPI_GetComboboxSelectedIndex("durability");
+        setModifier(ExtraSettingsAPI_GetComboboxSelectedIndex("durability"));
     }
 
     public void ExtraSettingsAPI_SettingsOpen()
@@ -102,10 +96,10 @@ public class AlmostNoDurability : Mod
 
     public void ExtraSettingsAPI_SettingsClose()
     {
-        modifier = ExtraSettingsAPI_GetComboboxSelectedIndex("durability");
+        setModifier(ExtraSettingsAPI_GetComboboxSelectedIndex("durability"));
     }
 
-    public void ExtraSettingsAPI_SetComboboxSelectedIndex(string SettingName, int value)
+        public void ExtraSettingsAPI_SetComboboxSelectedIndex(string SettingName, int value)
     {
         if (ExtraSettingsAPI_Loaded)
             ExtraSettingsAPI_Traverse.Method("setComboboxSelectedIndex", new object[] { this, SettingName, value }).GetValue<int>();
@@ -118,4 +112,32 @@ public class AlmostNoDurability : Mod
         return -1;
     }
 
+    /********************
+    *   HARMONY STUFF   *
+    *********************/
+    [HarmonyPatch(typeof(Slot), "IncrementUses")]
+    public class HarmonyPatch_Slot_IncrementUses
+    {
+        [HarmonyPrefix]
+        static void Prefix(ref Slot __instance, ref int amountOfUsesToAdd)
+        {
+            if (slotShouldBeAffected(__instance)){
+                if (amountOfUsesToAdd < 0 && doCache(__instance)){
+                    amountOfUsesToAdd = 0;
+                }
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(PlayerInventory), "RemoveDurabillityFromHotSlot")]
+    public class HarmonyPatch_PlayerInventory_RemoveDurabillityFromHotSlot
+    {
+        [HarmonyPrefix]
+        static void Prefix(ref PlayerInventory __instance, ref int durabilityStacksToRemove)
+        {
+            if (durabilityStacksToRemove > 0 && doCache(__instance)){
+                durabilityStacksToRemove = 0;
+            }
+        }
+    }
 }
