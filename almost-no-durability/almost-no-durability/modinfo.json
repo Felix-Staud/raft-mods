@@ -1,8 +1,8 @@
 {
   "name": "almost no durability",
   "author": "zer0",
-  "description": "reduces the durability depletion to almost 0 for equipment and tools.",
-  "version": "3.1",
+  "description": "Configurable durability for tools and equipment (1x - 10x or infinite). Please report issues with the mod in the GitHub repository",
+  "version": "3.2",
   "license": "GNU AGPLv3",
   "icon": "icon.png",
   "banner": "banner.jpg",
@@ -12,8 +12,10 @@
   "excludedFiles": [],
   "modSettings": [
     {
-      "name": "Durability Modifier",
+      "name": "durability",
+      "text": "Durability Modifier",
       "type": "combobox",
+      "access": "mainmenu",
       "default": "infinite",
       "values": [
         "infinite",

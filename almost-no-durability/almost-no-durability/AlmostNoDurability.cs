@@ -23,6 +23,11 @@ public class AlmostNoDurability : Mod
         Debug.LogError("[" + modInfo.name + "]: " + message.ToString());
     }
 
+    public static bool slotShouldBeAffected(Slot slot) {
+        return slot.itemInstance.settings_consumeable.FoodType == FoodType.None
+            && slot.itemInstance.settings_cookable.CookingTime <= 0;
+    }
+
     public void Start()
     {
         modInfo = modlistEntry.jsonmodinfo;
@@ -46,7 +51,7 @@ public class AlmostNoDurability : Mod
         {
             bool prevent = false;
 
-            if (__instance.itemInstance.settings_consumeable.FoodType == FoodType.None && amountOfUsesToAdd != null)
+            if (amountOfUsesToAdd != null && slotShouldBeAffected(__instance))
             {
                 if (modifier > 0) {
                     int hash = __instance.GetHashCode();
@@ -83,21 +88,21 @@ public class AlmostNoDurability : Mod
     
     public void ExtraSettingsAPI_Load()
     {
-        modifier = ExtraSettingsAPI_GetComboboxSelectedIndex("Durability Modifier");
+        modifier = ExtraSettingsAPI_GetComboboxSelectedIndex("durability");
     }
 
     public void ExtraSettingsAPI_SettingsOpen()
     {
         if (modifier > 0) {
-            ExtraSettingsAPI_SetComboboxSelectedIndex("Durability Modifier", modifier);
+            ExtraSettingsAPI_SetComboboxSelectedIndex("durability", modifier);
         } else {
-            ExtraSettingsAPI_SetComboboxSelectedIndex("Durability Modifier", 0);
+            ExtraSettingsAPI_SetComboboxSelectedIndex("durability", 0);
         }
     }
 
     public void ExtraSettingsAPI_SettingsClose()
     {
-        modifier = ExtraSettingsAPI_GetComboboxSelectedIndex("Durability Modifier");
+        modifier = ExtraSettingsAPI_GetComboboxSelectedIndex("durability");
     }
 
     public void ExtraSettingsAPI_SetComboboxSelectedIndex(string SettingName, int value)
