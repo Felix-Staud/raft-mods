@@ -1,7 +1,7 @@
 {
   "name": "almost no durability",
   "author": "zer0",
-  "description": "Configurable durability for tools and equipment (1x - 10x or infinite). Please report issues with the mod in the GitHub repository",
+  "description": "Configurable durability for tools and equipment (1x - 9x or infinite). Please report issues the GitHub repository linked on the download page",
   "version": "3.2",
   "license": "GNU AGPLv3",
   "icon": "icon.png",
