@@ -10,7 +10,7 @@
   - _We tested this with two persons, both having the mod running, and it seemed to work fine_
 - ### Configurable [optional. requires dependency mod !!!]
   - **To be able to configure your durability you have to have [extra-settings-api](https://www.raftmodding.com/mods/extra-settings-api) mod installed !!!**
-  - Configuration Options range **from 2x to 10x** or default back to inifinte
+  - Configuration Options range **from 2x to 9x** or default back to inifinte
   - *supported since v3.0*
 
 -------------
